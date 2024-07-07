@@ -2,11 +2,6 @@
 #  sh脚本使用 
 
 
-作者：咸鱼Linux运维
-链接：https://zhuanlan.zhihu.com/p/612782776
-来源：知乎
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
 #! /bin/bash
 
 read -p "请输入要查询的PID: " P
@@ -33,10 +28,6 @@ echo -e "\e[32m--------------------------------\e[0m"
 
 
 
-作者：咸鱼Linux运维
-链接：https://zhuanlan.zhihu.com/p/612782776
-来源：知乎
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 #! /bin/bash
 
@@ -101,12 +92,6 @@ else
 fi
 
 
-
-作者：咸鱼Linux运维
-链接：https://zhuanlan.zhihu.com/p/612782776
-来源：知乎
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
 #! /bin/bash
 
 #统计不同状态 tcp 连接（除了 LISTEN ）
@@ -134,11 +119,6 @@ echo -e "\e[31m前十个连接到本地80端口的 IP 地址及连接数为：\e
 
 
 
-
-作者：咸鱼Linux运维
-链接：https://zhuanlan.zhihu.com/p/612782776
-来源：知乎
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 #!/bin/bash
 
@@ -190,8 +170,3 @@ find / -type f -perm -4000 -o -perm -2000 -print -exec echo {} >> /tmp/s_permiss
 
 #查找系统中没有属主以及属组的文件，并存放到/tmp/none.txt
 find / -nouser -o -nogroup -exec echo {} >> /tmp/none.txt  \;
-
-作者：咸鱼Linux运维
-链接：https://zhuanlan.zhihu.com/p/612782776
-来源：知乎
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
