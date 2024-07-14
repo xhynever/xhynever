@@ -50,4 +50,6 @@ func main() {
 	b = append(b, "CCC11"...)
 	fmt.Println(string(a), string(b), string(c))
 
+	fmt.Println(Pi)
+
 }
