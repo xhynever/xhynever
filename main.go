@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"reflect"
 )
 
 const Pi float64 = 3.14159265358979323846
@@ -36,10 +37,10 @@ func main() {
 	// x := []int{1, 2, 3, 4, 5, 6,}
 	// b := add(a...)
 
-	// fmt.Println(b)
-	// fmt.Printf("%T\n", zero)
-	// fmt.Println(reflect.TypeOf(zero))
-	// fmt.Println(reflect.TypeOf(zero))
+	fmt.Println(b)
+	fmt.Printf("%T\n", zero)
+	fmt.Println(reflect.TypeOf(zero))
+	fmt.Println(reflect.TypeOf(zero))
 
 	// 共享内存切片
 
