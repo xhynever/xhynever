@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 // const类型，以及打印类型
 // const Pi float64 = 3.14159265358979323846
 // const zero = 0.0
@@ -38,4 +34,5 @@ import (
 // 	fmt.Println(b)
 // }
 
-
+// 三次握手    标志位syn
+// 四次挥手    标志位fin
