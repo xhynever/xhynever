@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 )
 
 const Pi float64 = 3.14159265358979323846
@@ -52,15 +53,36 @@ func main() {
 	// fmt.Println(Pi)
 	// 匿名函数执行后变量效果
 
-	var c int
-	c = 2
-	func(d int) {
-		var b = 1
-		fmt.Println(b)
-		c = d
+	// var c int
+	// c = 2
+	// func(d int) {
+	// 	var b = 1
+	// 	fmt.Println(b)
+	// 	c = d
 
-	}(3)
-	fmt.Println(c)
+	// }(3)
+	// fmt.Println(c)
 	// fmt.Println(b)
 
+	// 写一个http服务
+	http.HandleFunc("/", HelloHandler)
+	http.ListenAndServe(":8000", nil)
+
 }
+func HelloHandler(w http.Resp onseWriter, req *http.Request) {
+	fmt.Fprintf(w, "Hello World")
+
+}
+
+// func HelloHandler(w http.ResponseWriter, r *http.Request) {
+// 	fmt.Fprintf(w, "Hello World")
+//  }
+
+//  func main () {
+// 	http.HandleFunc("/", HelloHandler)
+// 	http.ListenAndServe(":8000", nil)
+
+//  }
+
+
+
