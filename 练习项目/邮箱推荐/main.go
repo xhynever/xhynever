@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/smtp"
 	"os"
@@ -31,7 +30,7 @@ func main() {
 
 	// 加载配置文件，登录至邮箱
 	config := LoadConfig("./config.json")
-	// fmt.Println(config)
+	fmt.Println(config)
 
 	flag.Usage = flagUsage
 
@@ -47,9 +46,10 @@ func main() {
 		Title:   *title,
 		Content: *content,
 	}
-
+	fmt.Println(msg)
 	if *to != "" && *title != "" && *content != "" {
-		SendMail(config, msg)
+		// SendMail(config, msg)
+
 		// fmt.Printf("%v\n %v \n %v \n", *to, *title, *content)
 	} else {
 		panic("to,title,content can't be null!")
@@ -59,17 +59,33 @@ func main() {
 // 加载配置文件
 func LoadConfig(configPath string) (config *Config) {
 	// 读取配置文件
-	data, err := ioutil.ReadFile(configPath)
+	// data, err := ioutil.ReadFile(configPath)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// data, err := os.ReadFile(configPath)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	file, err := os.Open(configPath)
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer file.Close()
+	data := make([]byte, 1024)
+	n, err := file.Read(data)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// fmt.Println(data)
 	// 初始化用户信息
 	config = &Config{}
-	err = json.Unmarshal(data, &config)
+	err = json.Unmarshal(data[:n], &config)
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	fmt.Println("打印config")
+	fmt.Println(config)
 	return config
 }
 
