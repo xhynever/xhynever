@@ -32,3 +32,16 @@ https://github.com/developer-learning/reading-go
 
 raft实现
  https://github.com/developer-learning/reading-go
+
+
+# go依赖更新
+
+## go list -m all
+查看所有依赖版本
+## go mod tidy
+自动更新依赖包为最新
+
+## go mod vendor
+将依赖包下载到vendor目录下
+若依赖是本地的，则不会下载，需要手动添加
+

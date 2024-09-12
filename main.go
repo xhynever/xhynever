@@ -1,8 +1,8 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"net/http"
 )
 
 const Pi float64 = 3.14159265358979323846
@@ -26,7 +26,85 @@ const zero = 0.0
 // 	return ERR_ELEM_NT_EXIST
 // }
 
+type ArrayStack struct {
+	data []interface{}
+}
+
+func NewStack() *ArrayStack {
+	return &ArrayStack{}
+}
+
+type Stack interface {
+	Push(e interface{})
+	Pop() (interface{}, error)
+	Top() (interface{}, error)
+	// IsEmpty() bool
+
+}
+
+func (s *ArrayStack) Push(e interface{}) {
+	s.data = append(s.data, e)
+}
+
+func (s *ArrayStack) Pop() (interface{}, error) {
+	if len(s.data) == 0 {
+		return nil, nil
+	}
+	e := s.data[len(s.data)-1]
+	s.data = s.data[:len(s.data)-1]
+	return e, nil
+}
+
+func (s *ArrayStack) Top() (interface{}, error) {
+	if len(s.data) == 0 {
+		return nil, nil
+	}
+	return s.data[len(s.data)-1], nil
+}
+func (s *ArrayStack) IsEmpty() bool {
+	return len(s.data) == 0
+}
+
+var (
+	appPath string
+	// configDir    = flag.String("configs", osx.GetEnv("CATEGRAF_CONFIGS", "conf"), "Specify configuration directory.(env:CATEGRAF_CONFIGS)")
+	debugMode    = flag.Bool("debug", false, "Is debug mode?")
+	debugLevel   = flag.Int("debug-level", 0, "debug level")
+	testMode     = flag.Bool("test", false, "Is test mode? print metrics to stdout")
+	interval     = flag.Int64("interval", 0, "Global interval(unit:Second)")
+	showVersion  = flag.Bool("version", false, "Show version.")
+	inputFilters = flag.String("inputs", "", "e.g. cpu:mem:system")
+	install      = flag.Bool("install", false, "Install categraf service")
+	remove       = flag.Bool("remove", false, "Remove categraf service")
+	start        = flag.Bool("start", false, "Start categraf service")
+	stop         = flag.Bool("stop", false, "Stop categraf service")
+	status       = flag.Bool("status", false, "Show categraf service status")
+	update       = flag.Bool("update", false, "Update categraf binary")
+	updateFile   = flag.String("update_url", "", "new version for categraf to download")
+)
+
 func main() {
+
+	var a []int
+	for _, b := range a {
+		fmt.Println("hello", b)
+	}
+	fmt.Println("nihao ")
+	// s := NewStack()
+	// fmt.Println(s.IsEmpty())
+	// fmt.Println(s.IsEmpty())
+	// fmt.Println(s.IsEmpty())
+	// s.Push("a")
+	// s.Push("b")
+	// s.Push(3)
+
+	// a, _ := s.Pop()
+	// b, _ := s.Pop()
+	// c, _ := s.Pop()
+	// fmt.Println(a)
+	// // fmt.Println("")
+	// fmt.Println(b)
+	// fmt.Println(c)
 	// s := make([]int,0)
 	// a := []int64{1, 2, 3}
 	// var flag bool
@@ -62,19 +140,18 @@ func main() {
 
 	// }(3)
 	// fmt.Println(c)
-	// fmt.Println(b)
 
 	// 写一个http服务
-	http.HandleFunc("/", HelloHandler)
-	http.ListenAndServe(":8000", nil)
-	
+	// http.HandleFunc("/", HelloHandler)
+	// http.ListenAndServe(":8000", nil)
+	// reflect.ValueOf("Hello")
 
 }
 
-func HelloHandler(w http.Resp onseWriter, req *http.Request) {
-	fmt.Fprintf(w, "Hello World")
+// func HelloHandler(w http.ResponseWriter, req *http.Request) {
+// 	fmt.Fprintf(w, "Hello World")
 
-}
+// }
 
 // func HelloHandler(w http.ResponseWriter, r *http.Request) {
 // 	fmt.Fprintf(w, "Hello World")
@@ -84,9 +161,4 @@ func HelloHandler(w http.Resp onseWriter, req *http.Request) {
 // 	http.HandleFunc("/", HelloHandler)
 // 	http.ListenAndServe(":8000", nil)
 
-
-
 //  }
-
-
-

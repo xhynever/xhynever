@@ -1,0 +1,10 @@
+FROM hub.atomgit.com/amd64/node:18-buster-slim
+
+# 设置工作目录
+WORKDIR /usr/src/app
+
+# 安装 Ganache CLI
+RUN npm install -g ganache-cli
+
+# 设置默认命令
+CMD ["ganache-cli"]
