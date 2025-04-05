@@ -1,0 +1,41 @@
+蚂蚁集团运行着全球最大的 Kubernetes（内部称为 Sigma) 集群之一。Kubernetes 社区官方以 5K node 作为 Kubernetes 规模化的事实标准,
+
+
+
+内容：在线业务,以前的蚂蚁业务在非docker容器中,后续需要无感知,无障碍迁移到 SigmaBoss 系统,
+
+SigmaBoss 系统海外化   
+人工识别代码,错误提示转英语。
+
+SigmaBoss 系统go语言化,基础package,时间,大数,普通调度接口,post写入接口
+
+
+节点故障自愈
+我们都知道物理机硬件存在一定的故障概率,随着集群节点规模的增加,集群中会常态出现故障节点,如果不及时修复上线,这部分物理机的资源将会被闲置。
+为解决这一问题,我们设计了一套故障发现、隔离、修复的闭环自愈系统。
+
+节点故障自愈系统会根据故障类型创建不同的维修流程,例如：硬件维系流程、系统重装流程等。维修流程中优先会隔离故障节点（暂停节点调度）,然后将节点上 Pod 打上待迁移标签来通知 PAAS 或 MigrateController 进行 Pod 迁移,完成这些前置操作后,会尝试恢复节点（硬件维修、重装操作系统等）,修复成功的节点会重新开启调度,长期未自动修复的节点由人工介入排查处理。
+
+pod不能随便驱逐,node决不能无申请重启。
+追加查询,再扩容--(关键业务特殊处理。)
+对故障的pod限流,等待一定时间重新健康检测,在此期间监测业务失败度。满足相关条件后重启pod,增加流量
+对故障node的处理,进行对故障业务进行限流,执行pod检测的相关命令
+
+在别的node机器上紧急启动业务pod,保证业务可用
+
+等待监测业务流量已经达到别的node上,进行pod的迁移,驱逐.然后检测node是否还存在相关业务,对node机器限流之后冷处理若干天后在进行机器检测。
+
+
+节点终态管理
+全量 ReadinessGates：记录节点可调度需要检查的 Condition 列表
+Condition ConfigMap：各节点运维 Operators 终态状态上报 ConfigMap
+
+协作关系：
+1. 外部节点运维 Operators 检测并上报与自己相关的子终态数据至对应的 Condition ConfigMap；
+2. Machine-Operator 根据标签获取节点相关的所有子终态 Condition ConfigMap,并同步至 Machine status 的 conditions中
+3. Machine-Operator 根据全量 ReadinessGates 中记录的 Condition 列表,检查节点是否达到终态,未达到终态的节点不开启调度
+
+维护node,pod标签.通过K8S 2次开发调度器负责对我们打的标签进行额外的处理
+
+
+

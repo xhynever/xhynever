@@ -1,0 +1,39 @@
+Multichain  MPC，分布式网路，保管私钥。 SMPC（安全多方计算）   TSS（门限签名方案）    与多签不同
+问题：代码漏洞导致,黑客通过相同的 rsv 签名 R 值，逆向推导出了某个多方计算账户的私钥，  在BSC上的V3路由器MPC账户下检测到两个V3路由器交易，这两个交易具有相同的R值签名，而黑客反推到这个MPC账户的私钥
+
+
+cbridge 第三方跨链协议，系统依赖一个中心化的网关为用户推荐节点，当节点加入网络时，它需向一个网关服务注册各种信息，如费用表和流动性状态，该网关负责持续监控cBridge的节点状态和性能，当用户发送跨链请求时，会被定向到网关，网关根据流动性可用性、历史桥接成功率、费用等评估注册节点，并向用户推荐合适的节点。
+SGN
+ 自管  共管
+
+
+一种是由原底层开发团队牵头构建的原生跨链桥，如Arbitrum Bridge、Avalanche Bridge、Optimism Gateway等；第二种是cBridge、Hop Protocol等第三方跨链协议。
+
+
+尤其是采用Optimistic Rollup安全模型的Arbitrum和Optimism，从Layer 2（L2）赎回 资产到Layer 1（L1）时，用户发送交易后，需等待一个挑战期（大约7日）
+
+
+
+
+
+
+
+ 🙂所有岗位JD，可以点击此处查看
+https://abetterweb3.notion.site/Manta-Network-c28f0400e1f547248895bb91047e81c0
+
+
+本期力招💪
+Senior Blockchain Engineer (Rollup)
+Russian Language Community Manager
+
+直接戳TG: @haylie8
+
+
+
+
+
+
+
+
+
+
